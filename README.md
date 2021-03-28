@@ -6,6 +6,8 @@ run follow command on your local machine with a specific folder
 
 $git clone https://github.com/vivek-2601/Web-Store.git
 
+$ cd Web-Store
+
 $git checkout -b YOURNAME
 
 $git push origin YOURNAME
