@@ -9,3 +9,5 @@ $git clone https://github.com/vivek-2601/Web-Store.git
 $git checkout -b YOURNAME
 
 $git push origin YOURNAME
+
+so after this yoou will get your own name branch and you have to work on them
