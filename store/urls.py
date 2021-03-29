@@ -8,5 +8,8 @@ app_name = 'store'
 
 urlpatterns = [
     # Home page
-    path('', views.products, name = 'products'),
+    path('', views.index, name = 'index'),
+    path('registration/', views.registration, name = 'registration'),
+    path('login/', views.login, name = 'login'),
+    path('about/', views.about, name = 'about'),
 ]
