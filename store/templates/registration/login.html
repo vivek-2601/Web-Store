@@ -1,0 +1,15 @@
+New user?
+<a href="{% url 'store:register' %}">Register</a>
+{% if form.errors %}
+    <p> Your username and password didn't match. Please try again. </p>
+{% endif %}
+
+<form method="post" action="{% url 'store:login' %}">
+  {% csrf_token %}
+  {{form.as_p}}
+
+  <button name="submit">Log in</button>
+  <input type = "hidden" name = "next"
+    value="{% url 'store:products' %}" />
+
+</form>

@@ -1,5 +1,15 @@
 <p> Welcome sir ji</p>
+{% if user.is_authenticated %}
+   Hello, {{user.username}}.
+   <a href="{% url 'supplier:logout' %}"> Log out</a>
 
+{% else %}
+  <a href="{% url 'supplier:login' %}"> Supplier Log in </a> -
+  <a href="{% url 'supplier:register' %}">Supplier registration </a> -
+  <a href="{% url 'store:login' %}">User log in</a> -
+  <a href="{% url 'store:register' %}">User registration </a>
+{% endif %}
+  <a href="{% url 'supplier:products' %}"> Sell your products </a>
 <p> Products <p>
 
  <ul>
