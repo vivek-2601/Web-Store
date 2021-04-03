@@ -1,0 +1,9 @@
+<p>Your products are listed here</p>
+
+<ul>
+  {% for product in products %}
+    <li>{{ product }}</li>
+  {% empty %}
+    <p> You have nothing added to sell </p>
+  {% endfor %}
+</ul>
