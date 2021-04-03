@@ -6,4 +6,4 @@ class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = ['name']
-        labels = {'text': ''}
+        labels = {'name': 'Procut Name'}

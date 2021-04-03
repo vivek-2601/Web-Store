@@ -1,5 +1,5 @@
 <p>Your products are listed here</p>
-
+<a href="{% url 'supplier:new_product' %}"> Add a new product </a>
 <ul>
   {% for product in products %}
     <li>{{ product }}</li>
