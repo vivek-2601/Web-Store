@@ -9,4 +9,5 @@ app_name = 'store'
 urlpatterns = [
     # Home page
     path('', views.products, name = 'products'),
+   
 ]

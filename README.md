@@ -13,3 +13,7 @@ $ git checkout -b YOURNAME
 $ git push origin YOURNAME
 
 so after this yoou will get your own name branch and you have to work on them
+
+
+Store will interact with buyers
+supplier will interact with sellers

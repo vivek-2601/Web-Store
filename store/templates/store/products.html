@@ -1,2 +1,12 @@
-<p> Aayiye aayiye Jahapanah</p>
+<p> Welcome sir ji</p>
+
+<p> Products <p>
+
+ <ul>
+  {% for product in products %}
+    <li>{{ product }}</li>
+  {% empty %}
+    <li>No products have been added yet.</li>
+  {% endfor %}
+</ul>
 
