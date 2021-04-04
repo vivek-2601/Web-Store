@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
+from django.contrib.auth.models import User, Permission
+from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from store.models import Product
@@ -33,6 +35,8 @@ def new_product(request):
     return render(request, 'supplier/new_product.html', context)
 
 
+
+
 def register(request):
     """Register a new Seller"""
     if request.method != 'POST':
@@ -44,9 +48,11 @@ def register(request):
 
         if form.is_valid():
             new_user = form.save()
+            permission = Permission.objects.get(codename='can_sell')
+            new_user.user_permissions.add(permission)
             # Log the new user in and redirect to home page
             login(request, new_user)
-            return redirect('supplier:products')
+            return redirect('users:redirects', kw = new_user.username)
     # Display a blank or invalid form
     context = {'form': form}
     return render(request, 'registration/supplier_register.html', context)

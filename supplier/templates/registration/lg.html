@@ -10,7 +10,12 @@
   {{form.as_p}}
 
   <button name="submit">Log in</button>
+  {% if request.user.has_perm %}
   <input type = "hidden" name = "next"
     value="{% url 'supplier:products' %}" />
+  {% else %}
+  <input type = "hidden" name = "next"
+    value="{% url 'store:products' %}" />
+  {% endif %}
 
 </form>

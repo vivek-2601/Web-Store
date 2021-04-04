@@ -1,5 +1,6 @@
 <p>Your products are listed here</p>
-<a href="{% url 'supplier:new_product' %}"> Add a new product </a>
+<a href="{% url 'supplier:new_product' %}"> Add a new product </a>--
+<a href="{% url 'users:logout' %}"> Logout</a>
 <ul>
   {% for product in products %}
     <li>{{ product }}</li>
