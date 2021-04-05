@@ -1,15 +1,14 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, logout
-from django.contrib.auth.models import User, Permission
-from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth import login
+from django.contrib.auth.models import Permission
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from store.models import Product
 from .forms import ProductForm
 
 
-# Create your views here.
-@login_required(login_url= 'supplier:login')
+# Make a diffrent page for exitsing seller to become seller 
+@permission_required('auth.can_sell', login_url='supplier:register')
 def products(request):
     """The home page for store. Show all the products."""
     products = Product.objects.order_by('name')
