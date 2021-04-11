@@ -2,3 +2,6 @@
 env/
 __pycache__/
 db.sqlite3
+deleted
+issues
+current_work

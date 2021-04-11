@@ -11,7 +11,7 @@ from .forms import ProductForm
 @permission_required('auth.can_sell', login_url='supplier:register')
 def products(request):
     """The home page for store. Show all the products."""
-    products = Product.objects.order_by('name')
+    products = Product.objects.filter(owner=request.user).order_by('name')
     context = {'products': products}
     return render(request, 'supplier/products.html', context)
 
@@ -25,8 +25,11 @@ def new_product(request):
     else:
         # POST data submitted; process data.
         form = ProductForm(data=request.POST)
+        
         if form.is_valid():
-            form.save()
+            new_prod = form.save(commit=False)
+            new_prod.owner = request.user
+            new_prod.save()
             return redirect('supplier:products')
 
     # Display a blan or invalid form.
