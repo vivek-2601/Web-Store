@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     # My apps
     'store',
     'supplier',
+    'users',
 
     # Default django apps
     'django.contrib.admin',
