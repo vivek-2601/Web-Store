@@ -1,0 +1,8 @@
+<P>Make this page up. U can accesses a produt by {{ product.id}}</p>
+
+<form method= POST action="{% url 'store:product' product.id %}">
+{% csrf_token %}
+{{ form.as_p}}
+<button name= "submit"> Place order</button>
+<input type='hidden' name = 'next' value = 'store:products'>
+<form>

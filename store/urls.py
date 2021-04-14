@@ -9,8 +9,11 @@ app_name = 'store'
 urlpatterns = [
     # Home page
     path('', views.products, name = 'products'),
-    # Include defalult auth urls
-    #''' path('users/', include('django.contrib.auth.urls')),'''
     # New use registration page.
     path('users/register', views.register, name ='register'),
+    # Individual product's page.
+    path('<int:pro_id>', views.product, name= 'product'),
+    # Place order for that individual product.
+    path('order/<int:pro_id', views.order, name = 'order')
+
 ]
