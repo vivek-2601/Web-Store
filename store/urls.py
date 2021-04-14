@@ -13,7 +13,6 @@ urlpatterns = [
     path('users/register', views.register, name ='register'),
     # Individual product's page.
     path('<int:pro_id>', views.product, name= 'product'),
-    # Place order for that individual product.
-    path('order/<int:pro_id', views.order, name = 'order')
+    
 
 ]

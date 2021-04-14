@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
-
+from django.contrib.auth.decorators import login_required
 from .models import Product, Order
 from .forms  import AddrForm, OrderForm
 
 # Create your views here.
+@login_required(login_url='users:login')
 def product(request, pro_id):
     """Page for individual product"""
     product = Product.objects.get(id = pro_id)

@@ -24,7 +24,7 @@ def new_product(request):
 
     else:
         # POST data submitted; process data.
-        form = ProductForm(data=request.POST)
+        form = ProductForm(request.POST, request.FILES)
         
         if form.is_valid():
             new_prod = form.save(commit=False)

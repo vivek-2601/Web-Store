@@ -10,9 +10,12 @@
   {{form.as_p}}
 
   <button name="submit">Log in</button>
-
+  {% if request.GET.next  %}
+  <input type = "hidden" name = "next"
+    value= "{{ request.GET.next }}" />
+  {% else %}
   <input type = "hidden" name = "next"
     value="{% url 'users:redirects' %}" />
-  
+  {% endif %}
 
 </form>

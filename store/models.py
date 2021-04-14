@@ -20,6 +20,8 @@ class Product(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     unitprice = models.PositiveIntegerField('Price')
     rem_quant = models.PositiveIntegerField(verbose_name = "quantity remaining")
+    image = models.ImageField(upload_to='images', null= True)
+    
     def __str__(self):
         """Return a string representtion of the model."""
         return self.name
@@ -32,6 +34,8 @@ class Order(models.Model):
     product    = models.ForeignKey(Product, on_delete=models.CASCADE)
     date       = models.DateTimeField(auto_now_add= True)
 
+    def __str__(self):
+        return self.product.name + '_' + str(self.quantity)
 class Supplier(models.Model):
     """Suplier supplies product."""
     # set id later on

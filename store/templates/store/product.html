@@ -1,5 +1,6 @@
-<P>Make this page up. U can accesses a produt by {{ product.id}}</p>
 
+<P>Make this page up. U can accesses a produt by {{ product.img_obj}}</p>
+<img src={{product.image.url}} >
 <form method= POST action="{% url 'store:product' product.id %}">
 {% csrf_token %}
 {{ form.as_p}}
