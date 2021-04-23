@@ -1,9 +1,9 @@
-
+{% extends 'base.html' %} {%block body%}
 <P>Make this page up. U can accesses a produt by {{ product.img_obj}}</p>
-<img src={{product.image.url}} >
-<form method= POST action="{% url 'store:product' product.id %}">
-{% csrf_token %}
-{{ form.as_p}}
-<button name= "submit"> Place order</button>
-<input type='hidden' name = 'next' value = 'store:products'>
-<form>
+<img src={{product.image.url}}>
+<form method=P OST action="{% url 'store:product' product.id %}">
+    {% csrf_token %} {{ form.as_p}}
+    <button name="submit"> Place order</button>
+    <input type='hidden' name='next' value='store:products'>
+    <form>
+        {%endblock%}

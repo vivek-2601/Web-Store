@@ -1,23 +1,21 @@
+{% extends 'base.html' %} {%block body%}
 <p> Welcome sir ji</p>
-{% if user.is_authenticated %}
-   Hello, {{user.username}}.
-   <a href="{% url 'users:logout' %}"> Log out</a>
+{% if user.is_authenticated %} Hello, {{user.username}}.
+<a href="{% url 'users:logout' %}"> Log out</a> {% else %}
+<a href="{% url 'users:login' %}"> Supplier Log in </a> -
+<a href="{% url 'supplier:register' %}">Supplier registration </a> -
+<a href="{% url 'users:login' %}">User log in</a> -
+<a href="{% url 'store:register' %}">User registration </a> {% endif %}
+<a href="{% url 'supplier:products' %}"> Sell your products </a>
+<p> Products - buyers site
+    <p>
 
-{% else %}
-  <a href="{% url 'users:login' %}"> Supplier Log in </a> -
-  <a href="{% url 'supplier:register' %}">Supplier registration </a> -
-  <a href="{% url 'users:login' %}">User log in</a> -
-  <a href="{% url 'store:register' %}">User registration </a>
-{% endif %}
-  <a href="{% url 'supplier:products' %}"> Sell your products </a>
-<p> Products - buyers site  <p>
+        <ul>
+            {% for product in products %}
+            <li>{{ product }}</li>
+            <a href="{% url 'store:product' product.id %}">Buy </a> {% empty %}
+            <li>No products have been added yet.</li>
+            {% endfor %}
+        </ul>
 
- <ul>
-  {% for product in products %}
-    <li>{{ product }}</li>
-    <a href="{% url 'store:product' product.id %}">Buy </a>
-  {% empty %}
-    <li>No products have been added yet.</li>
-  {% endfor %}
-</ul>
-
+        {%endblock%}

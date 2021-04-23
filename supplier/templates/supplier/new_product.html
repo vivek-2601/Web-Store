@@ -1,14 +1,14 @@
+{% extends 'base.html' %} {%block body%}
 <p> Add a new product </p>
 
-<form enctype= "multipart/form-data" action="{% url 'supplier:new_product' %}" method = 'post'>
-  {% csrf_token %}
-    {{form.as_p}}
-    <button name = "submit"> Add product</button>
+<form enctype="multipart/form-data" action="{% url 'supplier:new_product' %}" method='post'>
+    {% csrf_token %} {{form.as_p}}
+    <button name="submit"> Add product</button>
 
 </form>
 
 {% if img_obj %}
-  <h3> Uploaded </h3>
+<h3> Uploaded </h3>
 {% else %}
-  <h3> NO image </h3>
-{% endif %}
+<h3> NO image </h3>
+{% endif %} {%endblock%}
