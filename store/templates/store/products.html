@@ -1,23 +1,25 @@
-<p> Welcome sir ji</p>
-{% if user.is_authenticated %}
-   Hello, {{user.username}}.
-   <a href="{% url 'users:logout' %}"> Log out</a>
-
-{% else %}
-  <a href="{% url 'users:login' %}"> Supplier Log in </a> -
-  <a href="{% url 'supplier:register' %}">Supplier registration </a> -
-  <a href="{% url 'users:login' %}">User log in</a> -
-  <a href="{% url 'store:register' %}">User registration </a>
-{% endif %}
-  <a href="{% url 'supplier:products' %}"> Sell your products </a>
-<p> Products - buyers site  <p>
-
- <ul>
-  {% for product in products %}
-    <li>{{ product }}</li>
-    <a href="{% url 'store:product' product.id %}">Buy </a>
-  {% empty %}
+{% extends 'base.html' %}
+<!---->
+{%block body%}
+<b> Welcome <i>sir ji</i></b>
+<div class="productview" style="margin: 16px;">
+    {% for product in products %}
+    <div class="card" style="width: 18rem;">
+        <img style="height:auto; width:286px;" src="{{product.image.url}}" class="card-img-top" alt="{{prduct.name}} image">
+        <div class="card-body">
+            <h5 class="card-title">{{ product.name }}</h5>
+            <h5 class="card-title">Only &#x20B9;{{product.unitprice}}</h5>
+            <p class="card-text">
+                product description
+            </p>
+            <a href="{% url 'store:product' product.id %}" class="btn btn-primary">CheckOut</a>
+            <a href="{% url 'store:product' product.id %}" class="btn btn-primary">Buy</a>
+        </div>
+    </div>
+    <!---->
+    {% empty %}
     <li>No products have been added yet.</li>
-  {% endfor %}
-</ul>
-
+    {% endfor %}
+    <!---->
+    {%endblock%}
+</div>

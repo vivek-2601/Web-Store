@@ -15,7 +15,6 @@ def products(request):
     context = {'products': products}
     return render(request, 'supplier/products.html', context)
 
-
 def new_product(request):
     """Add a ner Product."""
     if request.method != 'POST':
@@ -54,7 +53,7 @@ def register(request):
             new_user.user_permissions.add(permission)
             # Log the new user in and redirect to home page
             login(request, new_user)
-            return redirect('users:redirects', kw = new_user.username)
+            return redirect('users:redirects')
     # Display a blank or invalid form
     context = {'form': form}
     return render(request, 'registration/supplier_register.html', context)
