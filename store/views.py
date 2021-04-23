@@ -21,10 +21,13 @@ def product(request, pro_id):
             odr.product = Product.objects.get(id = pro_id)
             # update product quantites
             product = Product.objects.get(id=pro_id)
-            product.rem_quant = product.rem_quant - odr.quantity
-            product.save()
-            odr.save()
-
+            if(product.rem_quant - odr.quantity>=0):
+                product.rem_quant = product.rem_quant - odr.quantity
+                product.save()
+                odr.save()
+            else:
+                context = {'required': odr.quantity,'remaining':product.rem_quant,'productid':pro_id}
+                return render(request, 'store/outofrange.html', context)
             return redirect('store:products')
 
     context = {"product": product, "form": form}
@@ -58,5 +61,3 @@ def register(request):
     # Display a blank or invalid form
     context = {'form_u': form_u, 'form_a': form_a}
     return render(request, 'registration/user_register.html', context)
-
-

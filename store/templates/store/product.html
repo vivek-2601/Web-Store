@@ -14,18 +14,18 @@
             <h2>{{product.name}}</h2>
             <h5>Seller : {{product.owner}}</h5>
             <h5>Price : {{product.unitprice}}</h5>
-            <h5>Unit Remaining : {{product.rem_quant}}</h5>
+            <h5>Unit Remaining :
+                <span id="remaining">{{product.rem_quant}}</span>
+            </h5>
             <h6>Product Description</h6>
             <br>
             <form method=POST action="{% url 'store:product' product.id %}">
                 {% csrf_token %} {{ form.as_p}}
-                <button name="submit"> Place order</button>
+                <button name="placeordersubmit"> Place order</button>
                 <input type='hidden' name='next' value='store:products'>
                 <form>
         </div>
     </div>
 </div>
-
-
 
 {%endblock%}

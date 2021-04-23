@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+<!---->
+{%block body%}
+
+<P>Sorry For Inconvenience </P>
+<p>But we only have left with only {{remaining}} piece and you want {{required}} piece</P>
+<p>if {{remaining}} piece would be okk then <a href="{% url 'store:product' productid %}">click here</a> or for more product go to home</p>
+
+{%endblock%}
