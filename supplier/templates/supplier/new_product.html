@@ -1,4 +1,6 @@
-{% extends 'base.html' %} {%block body%}
+{% extends 'base.html' %}
+<!---->
+{%block body%}
 <p> Add a new product </p>
 
 <form enctype="multipart/form-data" action="{% url 'supplier:new_product' %}" method='post'>
@@ -11,4 +13,6 @@
 <h3> Uploaded </h3>
 {% else %}
 <h3> NO image </h3>
-{% endif %} {%endblock%}
+{% endif %}
+<!---->
+{%endblock%}
