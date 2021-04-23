@@ -1,6 +1,15 @@
-{% extends 'base.html' %} {%block body%}
-<P>Make this page up. U can accesses a produt by {{ product.img_obj}}</p>
-<img src={{product.image.url}}>
+{% extends 'base.html' %}
+<!---->
+{%block body%}
+
+<p>This Page Is Under Development</p>
+
+<h2>{{product.name}}</h2>
+<h5>Seller : {{product.owner}}</h5>
+<h5>Price : {{product.unitprice}}</h5>
+<h5>Unit Remaining : {{product.rem_quant}}</h5>
+{{ product.img_obj}}
+<img style="height: 300px; width:auto;" src={{product.image.url}}>
 <form method=P OST action="{% url 'store:product' product.id %}">
     {% csrf_token %} {{ form.as_p}}
     <button name="submit"> Place order</button>
