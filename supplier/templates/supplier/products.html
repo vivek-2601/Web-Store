@@ -5,7 +5,9 @@
 <a href="{% url 'supplier:new_product' %}">Add a new product</a>
 <ul>
     {% for product in products %}
-    <li>{{ product }}</li>
+    <li>
+    <a href="{% url 'supplier:product' product.id %}"> {{ product }}
+    </li>
     {% empty %}
     <p> You have nothing added to sell </p>
     {% endfor %}

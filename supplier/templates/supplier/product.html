@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+<!---->
+{%block body%}
+
+<div class="container">
+    <div class="row row-cols-2">
+
+        <div class="col">
+            {{ product.img_obj}}
+            <img style="height: 600px; width:auto;" src={{product.image.url}}>
+
+        </div>
+        <div class="col">
+            <h2>{{product.name}}</h2>
+            <h5>Seller : {{product.owner}}</h5>
+            <h5>Price : {{product.unitprice}}</h5>
+            <h5>Unit Remaining : {{product.rem_quant}}</h5>
+            <h6>Product Description: {{ product.Description }}</h6>
+            <br>
+            <a href="{% url 'supplier:edit_pro' product.id %}"> Edit </a>
+        </div>
+    </div>
+</div>
+
+
+
+{%endblock%}

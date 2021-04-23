@@ -1,0 +1,8 @@
+{{ product.img_obj}}
+<img src = {{product.image.url}}>
+<form action = "{% url = 'supplier:edit_pro' product.id %}" method = 'post'>
+{% csrf_token %}
+
+{{form.as_p}}
+ <button name="submit"> Add product</button>
+</form>

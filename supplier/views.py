@@ -57,3 +57,35 @@ def register(request):
     # Display a blank or invalid form
     context = {'form': form}
     return render(request, 'registration/supplier_register.html', context)
+
+
+def product(request, pro_id):
+    '''Seller can see details of their product'''
+    product = Product.objects.get( id = pro_id)
+
+    # Make sure product belongs to the current supplier
+    if product.owner != request.user:
+        raise Http404
+    
+    return render(request, 'supplier/product.html', {'proudct':product})
+
+def edit_pro(request, pro_id):
+    '''Edit existing product'''
+    product = Product.objects.get( id = pro_id)
+   
+
+    if product.owner != request.user:
+       raise Http404
+    
+    if request.method != 'POST':
+        # Initial request; pre-fill form with detais
+        form = ProductForm(instance = product)
+
+    else:
+        # POST data submitted; process data.
+        form = ProductForm( instance = product, data = request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('supplier:product', pro_id = pro_id)
+
+    return render(request, 'supplier/edit_pro.html', {'form':form})
