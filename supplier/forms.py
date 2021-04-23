@@ -5,5 +5,14 @@ from store.models import Product
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['name', 'unitprice', 'rem_quant', 'image']
-        labels = {'name': 'Procut Name',}
+        fields = [
+            'name', 
+            'category', 
+            'unitprice', 
+            'rem_quant', 
+            'description',
+            'image',
+        ]
+        labels = {
+            'name': 'Product Name',
+        }
