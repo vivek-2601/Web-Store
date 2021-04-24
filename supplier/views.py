@@ -5,6 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required, permission_required
 from store.models import Product
 from .forms import ProductForm
+from django.http import Http404
 
 
 # Make a diffrent page for exitsing seller to become seller 
@@ -65,9 +66,9 @@ def product(request, pro_id):
 
     # Make sure product belongs to the current supplier
     if product.owner != request.user:
-        raise Http404
+        raise Http404("404")
     
-    return render(request, 'supplier/product.html', {'proudct':product})
+    return render(request, 'supplier/product.html', {'product':product})
 
 def edit_pro(request, pro_id):
     '''Edit existing product'''
