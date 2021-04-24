@@ -18,7 +18,7 @@
             <h5>Unit Remaining : {{product.rem_quant}}</h5>
             <h6>Description : {{product.description}}</h6>
             <br>
-            <form method=POST action="{% url 'store:product' product.id %}">
+            <form method=GET action="{% url 'store:confirm' product.id %}">
                 {% csrf_token %} {{ form.as_p}}
                 <button name="placeordersubmit"> Place order</button>
                 <input type='hidden' name='next' value='store:products'>

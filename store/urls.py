@@ -14,5 +14,7 @@ urlpatterns = [
     # Individual product's page.
     path('<int:pro_id>', views.product, name= 'product'),
     # Product Name By Search Page
-    path('store/search/',views.search,name='search')
+    path('store/search/',views.search,name='search'),
+    # Confirm and place order 
+    path('store/confirm/<int:pro_id>', views.confirm, name='confirm'),
 ]

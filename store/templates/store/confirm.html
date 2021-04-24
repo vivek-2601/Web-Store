@@ -1,0 +1,15 @@
+<p> Confirm You Oder </p>
+{{ product }} - {{ product.unitprice}}Rs.-
+ quantity:{{ quantity }}-
+ Pirce you pay: {{ amount}} Rs.
+
+ <h1></h1>
+<form prefix = 'confirmation' action = '{% url "store:confirm" product.id %}' method = 'post'>
+  {% csrf_token %}
+  <input type = 'submit' value='Pay Securly'>
+  <input type = 'hidden' name = 'quantity' value= {{quantity}}>
+</form>
+<form action='{% url "store:products" %}' method='get'>
+  <input type = 'submit' value='cancel'>
+</form>
+<h1> {{ order.user}} </h1>
