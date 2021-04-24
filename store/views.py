@@ -3,7 +3,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from .models import Product, Order
-from .forms  import AddrForm, OrderForm
+from .forms import AddrForm, OrderForm
 
 # Create your views here.
 @login_required(login_url='users:login')
@@ -21,10 +21,13 @@ def product(request, pro_id):
             odr.product = Product.objects.get(id = pro_id)
             # update product quantites
             product = Product.objects.get(id=pro_id)
-            product.rem_quant = product.rem_quant - odr.quantity
-            product.save()
-            odr.save()
-
+            if(product.rem_quant - odr.quantity>=0):
+                product.rem_quant = product.rem_quant - odr.quantity
+                product.save()
+                odr.save()
+            else:
+                context = {'required': odr.quantity,'remaining':product.rem_quant,'productid':pro_id}
+                return render(request, 'store/outofrange.html', context)
             return redirect('store:products')
 
     context = {"product": product, "form": form}
@@ -59,4 +62,8 @@ def register(request):
     context = {'form_u': form_u, 'form_a': form_a}
     return render(request, 'registration/user_register.html', context)
 
-
+def search(request):
+    if request.method == "GET":
+        pro_name = request.GET.get('searchquery','')
+        products = Product.objects.filter(name = pro_name)
+    return render(request, 'store/search.html',{'products':products,'pro_name':pro_name})

@@ -19,7 +19,6 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-
 class Product(models.Model):
     """A product is something user can buy."""
     # set id later on, as of now it added automatically
