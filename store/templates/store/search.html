@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 <!---->
 {%block body%}
-<b> Welcome <i>sir ji</i></b>
+
+<b>Search For Product {{pro_name}}</b><br>
+<b>To clear search <a href="{% url 'store:products' %}">click Here</a></b>
 
 <div class="productview" style="margin: 32px;">
     {% for product in products %}
@@ -22,7 +24,7 @@
     </div>
     <!---->
     {% empty %}
-    <li>No products have been added yet.</li>
+    <li>Not Found Product With Product Name {{pro_name}}</li>
     {% endfor %}
     <!---->
     {%endblock%}

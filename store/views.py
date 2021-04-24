@@ -3,7 +3,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from .models import Product, Order
-from .forms  import AddrForm, OrderForm
+from .forms import AddrForm, OrderForm
 
 # Create your views here.
 @login_required(login_url='users:login')
@@ -61,3 +61,9 @@ def register(request):
     # Display a blank or invalid form
     context = {'form_u': form_u, 'form_a': form_a}
     return render(request, 'registration/user_register.html', context)
+
+def search(request):
+    if request.method == "GET":
+        pro_name = request.GET.get('searchquery','')
+        products = Product.objects.filter(name = pro_name)
+    return render(request, 'store/search.html',{'products':products,'pro_name':pro_name})

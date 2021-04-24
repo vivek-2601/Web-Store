@@ -17,6 +17,7 @@ class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
     def __str__(self):
         return self.name
+
 class Product(models.Model):
     """A product is something user can buy."""
     # set id later on, as of now it added automatically
@@ -37,7 +38,7 @@ class Product(models.Model):
 class Order(models.Model):
     """Stores information about the placed order."""
     user       = models.ForeignKey(User, on_delete=models.CASCADE)
-    quantity   = models.IntegerField()
+    quantity   = models.PositiveIntegerField()
     product    = models.ForeignKey(Product, on_delete=models.CASCADE)
     date       = models.DateTimeField(auto_now_add= True)
 

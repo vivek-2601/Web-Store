@@ -13,6 +13,6 @@ urlpatterns = [
     path('users/register', views.register, name ='register'),
     # Individual product's page.
     path('<int:pro_id>', views.product, name= 'product'),
-    
-
+    # Product Name By Search Page
+    path('store/search/',views.search,name='search')
 ]
