@@ -16,6 +16,7 @@ def products(request):
     context = {'products': products}
     return render(request, 'supplier/products.html', context)
 
+@permission_required('auth.can_sell', login_url='supplier:register')
 def new_product(request):
     """Add a ner Product."""
     if request.method != 'POST':
@@ -59,9 +60,9 @@ def register(request):
     context = {'form': form}
     return render(request, 'registration/supplier_register.html', context)
 
-
+@permission_required('auth.can_sell', login_url='supplier:register')
 def product(request, pro_id):
-    '''Seller can see details of their product'''
+    """Seller can see details of their product"""
     product = Product.objects.get( id = pro_id)
 
     # Make sure product belongs to the current supplier
@@ -70,6 +71,7 @@ def product(request, pro_id):
     
     return render(request, 'supplier/product.html', {'product':product})
 
+@permission_required('auth.can_sell', login_url='supplier:register')
 def edit_pro(request, pro_id):
     '''Edit existing product'''
     product = Product.objects.get( id = pro_id)
@@ -89,4 +91,4 @@ def edit_pro(request, pro_id):
             form.save()
             return redirect('supplier:product', pro_id = pro_id)
 
-    return render(request, 'supplier/edit_pro.html', {'form':form})
+    return render(request, 'supplier/edit_pro.html', {'form':form, 'product':product})

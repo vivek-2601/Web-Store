@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 <!---->
+<<<<<<< HEAD
 {{ product.img_obj}}
 <img src={ {product.image.url}}>
 <form action="{% url = 'supplier:edit_pro' product.id %}" method='post'>
@@ -8,3 +9,22 @@
 </form>
 
 {%endblock%}
+=======
+{%block body%}
+{{ product.img_obj}}
+<div class="productview" style="margin: 16px;">
+    <div class="card" style="width: 18rem;">
+            <img style="height: auto; width:800px;" src = "{{product.image.url}}" class="card-img-top" alt="{{prduct.name}} image">
+        
+    <div class="card-body">
+    
+    <form class = 'card-title' action = "{% url 'supplier:edit_pro' product.id %}" method = 'post'>
+        {% csrf_token %}
+        {{form.as_p}}
+        <button name="submit"> Save changes</button>
+        </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+>>>>>>> 403381dfbb8f3366253679b03fc5af74c186da5c

@@ -2,20 +2,17 @@
 <!---->
 {%block body%}
 
-<div class="container">
-    <div class="row row-cols-2">
-
-        <div class="col">
+<div class="productview" style="margin: 16px;">
             {{ product.img_obj}}
-            <img style="height: 600px; width:auto;" src={{product.image.url}}>
+            <div class="card" style="width: 18rem;">
+            <img style="height: 550px; width:600px;" src="{{product.image.url}}" class="card-img-top" alt="{{prduct.name}} image">
 
-        </div>
-        <div class="col">
+            <div class="card-body">
             <h2>{{product.name}}</h2>
             <h5>Seller : {{product.owner}}</h5>
             <h5>Price : {{product.unitprice}}</h5>
             <h5>Unit Remaining : {{product.rem_quant}}</h5>
-            <h6>Product Description</h6>
+            <h6>{{ product.description }}</h6>
             <br>
             <form method=POST action="{% url 'store:product' product.id %}">
                 {% csrf_token %} {{ form.as_p}}

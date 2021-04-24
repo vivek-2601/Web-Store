@@ -12,11 +12,14 @@ class Address(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     addr = models.CharField(verbose_name="address", max_length=150)
 
+
 class Category(models.Model):
     """Category of a product."""
     name = models.CharField(max_length=100, unique=True)
     def __str__(self):
         return self.name
+
+
 class Product(models.Model):
     """A product is something user can buy."""
     # set id later on, as of now it added automatically
@@ -37,18 +40,20 @@ class Product(models.Model):
 class Order(models.Model):
     """Stores information about the placed order."""
     user       = models.ForeignKey(User, on_delete=models.CASCADE)
-    quantity   = models.IntegerField()
+    quantity   = models.PositiveIntegerField()
     product    = models.ForeignKey(Product, on_delete=models.CASCADE)
     date       = models.DateTimeField(auto_now_add= True)
 
     def __str__(self):
         return self.product.name + '_' + str(self.quantity)
-class Supplier(models.Model):
-    """Suplier supplies product."""
-    # set id later on
 
-    name = models.CharField(max_length= 30)
+class Payment(models.Model):
+    """Stores information about payment"""
+    # Payment is processed by third party, we just keep the data
+    # is paid amount redundancy? 
+    payed_amount = models.PositiveIntegerField()
+    time_stamp = models.DateTimeField(auto_now_add = True)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.name
+
 
