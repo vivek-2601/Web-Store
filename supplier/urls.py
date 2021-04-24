@@ -16,5 +16,5 @@ urlpatterns = [
     # Edit the product
     path('edit_pro/<int:pro_id>/', views.edit_pro, name = 'edit_pro'),
     # Supplier can see details of his produt
-    path('product/<int:pro_id>', views.product, name = 'product'),
+    path('supplier/product/<int:pro_id>/', views.product, name = 'product'),
 ]

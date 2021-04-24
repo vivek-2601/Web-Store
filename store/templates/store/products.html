@@ -10,7 +10,7 @@
             <h5 class="card-title">{{ product.name }}</h5>
             <h5 class="card-title">Only &#x20B9;{{product.unitprice}}</h5>
             <p class="card-text">
-                product description
+                {{ product.description}}
             </p>
             <a href="{% url 'store:product' product.id %}" class="btn btn-primary">CheckOut</a>
             <a href="{% url 'store:product' product.id %}" class="btn btn-primary">Buy</a>
