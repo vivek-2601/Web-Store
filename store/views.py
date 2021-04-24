@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from .models import Product, Order
 from .forms import AddrForm, OrderForm
+from math import ceil
 
 # Create your views here.
 @login_required(login_url='users:login')
@@ -62,8 +63,21 @@ def register(request):
     context = {'form_u': form_u, 'form_a': form_a}
     return render(request, 'registration/user_register.html', context)
 
-def search(request):
+def searchByProductName(request):
     if request.method == "GET":
         pro_name = request.GET.get('searchquery','')
         products = Product.objects.filter(name = pro_name)
     return render(request, 'store/search.html',{'products':products,'pro_name':pro_name})
+
+def categorywise(request):
+    allProduct = []
+    allCategory = Product.objects.values('category','id')
+    categories = {item['category'] for item in allCategory}
+    for cat in categories:
+        prod = Product.objects.filter(category = cat)
+        noOfSlide = ((len(prod)//4) + ceil((len(prod)/4)-(len(prod)//4)))
+        allProduct.append([prod,range(1,noOfSlide),noOfSlide])
+
+    parameter = {'allProducts':allProduct}
+    return render(request,'store/categorywise.html',parameter)
+

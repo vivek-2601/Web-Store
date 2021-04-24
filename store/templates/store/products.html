@@ -1,23 +1,26 @@
 {% extends 'base.html' %}
 <!---->
+
+<!---->
 {%block body%}
-<b> Welcome <i>sir ji</i></b>
 
 <div class="productview" style="margin: 32px;">
     {% for product in products %}
-    <div class="card" style="width: 18rem;">
-        <img style="height:auto; width:286px;" src="{{product.image.url}}" class="card-img-top" alt="{{prduct.name}} image">
-        <div class="card-body">
-            <h5 class="card-title">{{product.name}}</h5>
-            <h5 class="card-title">Only &#x20B9;{{product.unitprice}}</h5>
-            {% if product.rem_quant %}
-            <h5 class="card-title">Only {{product.rem_quant}} Piece Left</h5>
-            {% else %}
-            <h5 class="card-title">Out Of Stock</h5>
-            {% endif %}
-            <p class="card-text">{{product.description|slice:"0:50"}} ...</p>
-            <a href="{% url 'store:product' product.id %}" class="btn btn-primary">CheckOut</a>
-            <a href="{% url 'store:product' product.id %}" class="btn btn-primary">Buy</a>
+    <div class="col-xs-3 col-sm-3 col-md-3">
+        <div class="card" style="width: 18rem;">
+            <img style="height:auto; width:286px;" src="{{product.image.url}}" class="card-img-top" alt="{{prduct.name}} image">
+            <div class="card-body">
+                <h5 class="card-title">{{product.name}}</h5>
+                <h5 class="card-title">Only &#x20B9;{{product.unitprice}}</h5>
+                {% if product.rem_quant %}
+                <h5 class="card-title">Only {{product.rem_quant}} Piece Left</h5>
+                {% else %}
+                <h5 class="card-title">Out Of Stock</h5>
+                {% endif %}
+                <p class="card-text">{{product.description|slice:"0:50"}} ...</p>
+                <a href="{% url 'store:product' product.id %}" class="btn btn-primary">CheckOut</a>
+                <a href="{% url 'store:product' product.id %}" class="btn btn-primary">Buy</a>
+            </div>
         </div>
     </div>
     <!---->
@@ -25,5 +28,5 @@
     <li>No products have been added yet.</li>
     {% endfor %}
     <!---->
-    {%endblock%}
 </div>
+{%endblock%}
