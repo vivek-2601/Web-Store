@@ -15,14 +15,27 @@
             <h2>{{product.name}}</h2>
             <h5>Seller : {{product.owner}}</h5>
             <h5>Price : {{product.unitprice}}</h5>
-            <h5>Unit Remaining : {{product.rem_quant}}</h5>
             <h6>Description : {{product.description}}</h6>
+
+            {% if product.rem_quant %}
+            <h5>Unit Remaining : {{product.rem_quant}}</h5>
+            {% else %}
+            <h5 class="card-title">Out Of Stock</h5>
+            {% endif %}
+
             <br>
+            {% if product.rem_quant %}
             <form method=GET action="{% url 'store:confirm' product.id %}">
-                {% csrf_token %} {{ form.as_p}}
+                {% csrf_token %} <!---->{{ form.as_p}}
+            <!---->
+            
+            
                 <button name="placeordersubmit"> Place order</button>
                 <input type='hidden' name='next' value='store:products'>
                 <form>
+                    {%else%}
+                    <h5> Stay Tuned For Next Stok :) </h5>
+                    {%endif%}
         </div>
     </div>
 </div>
