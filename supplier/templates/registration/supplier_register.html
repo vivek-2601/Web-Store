@@ -3,7 +3,7 @@
 {%block body%}
 <p>Supplier registration</p>
 <form method="post" action="{% url 'supplier:register' %}">
-    {% csrf_token %} {{ form.as_p}}
+     {{ form_u.as_p }} {{ form_a.as_p }}
 
     <button name="submit">Register</button>
     <input type="hidden" name="next" value="{% url 'supplier:products' %}" />

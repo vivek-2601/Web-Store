@@ -1,8 +1,12 @@
-<h4> {{ user.username}} </h4>
-<h5> Address : {{address.addr}} <h5>
+<h3> {{ user.username}} </h3>
+<h4> Address : {{address.addr}} </h4>
 
 {% for o in orders %}
-  {{o.product__name}} {{ o.quantity}} {{o.date}}
+ <h5>{{o.product__name}}</h5>
+   quantity:{{ o.quantity }}| Price: {{ o.product__unitprice}}| 
+   You paid:{% widthratio o.quantity 1 o.product__unitprice %}
+   |Time: {{o.date}}
+  <h6>---</h6>
   <h6></h6>
 
 {% endfor %}

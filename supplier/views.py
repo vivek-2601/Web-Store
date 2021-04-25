@@ -4,7 +4,9 @@ from django.contrib.auth.models import Permission
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required, permission_required
 from django.db.models import Count, Sum
+from django.views.decorators.csrf import csrf_exempt
 
+from store.forms  import AddrForm
 from store.models import *
 from .forms import ProductForm
 from django.http import Http404
@@ -41,25 +43,34 @@ def new_product(request):
 
 
 
-
+@csrf_exempt
 def register(request):
     """Register a new Seller"""
     if request.method != 'POST':
         # Display blank registration form.
-        form = UserCreationForm()
+        form_u = UserCreationForm(prefix = 'user')
+        form_a = AddrForm( prefix = 'addr')
+        print(form_a)
     else:
         # Process completed from
-        form = UserCreationForm(data=request.POST)
+        form_u= UserCreationForm(data=request.POST, prefix = 'user')
+        form_a = AddrForm(data = request.POST, prefix = 'addr')
 
-        if form.is_valid():
-            new_user = form.save()
+        if form_u.is_valid():
+            new_user = form_u.save()
             permission = Permission.objects.get(codename='can_sell')
             new_user.user_permissions.add(permission)
             # Log the new user in and redirect to home page
+            if form_a.is_valid():
+                print("yes")
+                addr = form_a.save(commit=False)
+                addr.user = new_user
+                addr.save()
+            print("no")
             login(request, new_user)
             return redirect('users:redirects')
     # Display a blank or invalid form
-    context = {'form': form}
+    context = {'form_u': form_u, 'from_a':form_a}
     return render(request, 'registration/supplier_register.html', context)
 
 @permission_required('auth.can_sell', login_url='supplier:register')

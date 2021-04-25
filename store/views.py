@@ -90,7 +90,7 @@ def register(request):
 def searchByProductName(request):
     if request.method == "GET":
         pro_name = request.GET.get('searchquery','')
-        products = Product.objects.filter(name = pro_name)
+        products = Product.objects.filter(name__contains = pro_name)
     return render(request, 'store/search.html',{'products':products,'pro_name':pro_name})
 
 def categorywise(request):
