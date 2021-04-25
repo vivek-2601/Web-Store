@@ -17,4 +17,6 @@ urlpatterns = [
     path('edit_pro/<int:pro_id>/', views.edit_pro, name = 'edit_pro'),
     # Supplier can see details of his produt
     path('supplier/product/<int:pro_id>/', views.product, name = 'product'),
+    # All orders that the suppllier has got for his product
+    path('supplier/orders', views.orders, name= 'orders')
 ]

@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 class Address(models.Model):
     """Address of a user"""
-    # This can be changed from OnttoOne to ForignKey if we 
+    # This can be changed from OnetoOne to ForignKey if we 
     # want our users to have multiple addresses.
     
     user = models.OneToOneField(User, on_delete=models.CASCADE)

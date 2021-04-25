@@ -3,7 +3,9 @@ from django.contrib.auth import login
 from django.contrib.auth.models import Permission
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required, permission_required
-from store.models import Product
+from django.db.models import Count, Sum
+
+from store.models import *
 from .forms import ProductForm
 
 
@@ -91,3 +93,13 @@ def edit_pro(request, pro_id):
             return redirect('supplier:product', pro_id = pro_id)
 
     return render(request, 'supplier/edit_pro.html', {'form':form, 'product':product})
+
+
+@permission_required('auth_can_sell', login_url='supplier:register')
+def orders(request):
+    user = request.user
+    odrs = Order.objects.filter(product__owner = user).values('product__name').annotate(Sum('quantity'))
+
+
+    print(odrs)
+    return render(request, 'supplier/orders.html', {'orders': odrs})

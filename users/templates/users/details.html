@@ -1,0 +1,8 @@
+<h4> {{ user.username}} </h4>
+<h5> Address : {{address.addr}} <h5>
+
+{% for o in orders %}
+  {{o.product__name}} {{ o.quantity}} {{o.date}}
+  <h6></h6>
+
+{% endfor %}
