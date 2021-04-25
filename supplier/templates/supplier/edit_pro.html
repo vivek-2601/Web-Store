@@ -1,5 +1,15 @@
 {% extends 'base.html' %}
 <!---->
+<<<<<<< HEAD
+{{ product.img_obj}}
+<img src={ {product.image.url}}>
+<form action="{% url = 'supplier:edit_pro' product.id %}" method='post'>
+    {% csrf_token %} {{form.as_p}}
+    <button name="submit"> Add product</button>
+</form>
+
+{%endblock%}
+=======
 {%block body%}
 {{ product.img_obj}}
 <div class="productview" style="margin: 16px;">
@@ -17,3 +27,4 @@
     </div>
 </div>
 {% endblock %}
+>>>>>>> 403381dfbb8f3366253679b03fc5af74c186da5c

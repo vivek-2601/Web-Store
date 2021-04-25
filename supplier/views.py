@@ -7,6 +7,7 @@ from django.db.models import Count, Sum
 
 from store.models import *
 from .forms import ProductForm
+from django.http import Http404
 
 
 # Make a diffrent page for exitsing seller to become seller 
@@ -68,7 +69,7 @@ def product(request, pro_id):
 
     # Make sure product belongs to the current supplier
     if product.owner != request.user:
-        raise Http404
+        raise Http404("404")
     
     return render(request, 'supplier/product.html', {'product':product})
 
