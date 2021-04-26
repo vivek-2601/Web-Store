@@ -10,8 +10,8 @@
         </div>
       </b>
         <div class="card-body">
-            <form method="post" action="{% url 'supplier:register' %}">
-                {{form_u.as_p}} {{form_a.as_p}}
+            <form method="POST" action="{% url 'supplier:register' %}">
+                {% csrf_token %} {{ form_u.as_p }} {{ form_a.as_p }}
                 <button class="btn btn-outline-primary" name="submit">Register</button>
                 <input type="hidden" name="next" value="{% url 'supplier:products' %}" />
             </form>

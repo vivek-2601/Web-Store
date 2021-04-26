@@ -3,8 +3,7 @@
 <!---->
 
 <div>
-    <p>New seller?</p>
-    <a href="{% url 'supplier:register' %}">Register</a>
+
     <div class="card " style="margin-left: 20%;margin-right: 20%;">
         <b>  
       <div class="card-header text-center">
@@ -21,13 +20,16 @@
             {% endif %}
             <form method="post" action="{% url 'users:login' %}">
                 {% csrf_token %} {{form.as_p}}
-
                 <button name="submit" class="btn btn-outline-primary">Log in</button> {% if request.GET.next %}
                 <input type="hidden" name="next" value="{{ request.GET.next }}" /> {% else %}
                 <input type="hidden" name="next" value="{% url 'users:redirects' %}" /> {% endif %}
 
             </form>
         </div>
+    </div>
+    <div class="text-center">
+        <i>New Seller ?</i> &nbsp;
+        <a href="{% url 'supplier:register' %}">Register Here</a>
     </div>
 </div>
 

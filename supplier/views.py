@@ -43,8 +43,6 @@ def new_product(request):
     return render(request, 'supplier/new_product.html', context)
 
 
-
-@csrf_exempt
 def register(request):
     """Register a new Seller"""
     if request.method != 'POST':
