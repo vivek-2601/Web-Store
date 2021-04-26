@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 <!---->
 {%block body%}
-
 <div>
     <div class="card " style="margin-left: 20%;margin-right: 20%;">
         <b>  
@@ -11,12 +10,13 @@
       </b>
         <div class="card-body">
             <form method="POST" action="{% url 'supplier:register' %}">
-                {% csrf_token %} {{ form_u.as_p }} {{ form_a.as_p }}
+                {% csrf_token %} {{ form_u.as_p }}
+                <label for="id_addr">Address: </label>
+                <input type="textarea" name="addr" maxlength="500" autocomplete="addr" autofocus required id="id_addr"><br><br>
                 <button class="btn btn-outline-primary" name="submit">Register</button>
                 <input type="hidden" name="next" value="{% url 'supplier:products' %}" />
             </form>
         </div>
     </div>
 </div>
-
 {%endblock%}

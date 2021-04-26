@@ -2,13 +2,15 @@
 <!---->
 {%block body%}
 
-<div class="container">
-    <div class="row row-cols-2">
-
-        <div class="col">
-            <img style="height: 600px; width:auto;" src={{product.image.url}}>
+<div class="container my-4">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="row">
+                {{ product.img_obj}}
+                <img src={{product.image.url}}>
+            </div>
         </div>
-        <div class="col">
+        <div class="col-md-8">
             <form class='card-title' action="{% url 'supplier:edit_pro' product.id %}" method='post'>
                 {% csrf_token %} {{form.as_p}}
                 <button name="submit"> Save changes</button>
