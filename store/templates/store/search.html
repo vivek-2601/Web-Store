@@ -3,8 +3,8 @@
 {%block body%}
 
 
-<b>Search For Product {{pro_name}}</b><br>
-<b>To clear search <a href="{% url 'store:products' %}">click Here</a></b>
+<b>Search For Product: {{pro_name}}</b><br>
+<b><a href="{% url 'store:products' %}">Clear Search</a></b>
 
 <div class="productview" style="margin: 32px;">
     {% for product in products %}

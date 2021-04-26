@@ -2,12 +2,24 @@
 <!---->
 {%block body%}
 
-<p> User registration </p>
-<form method="post" action="{% url 'store:register' %}">
-    {% csrf_token %} {{ form_u.as_p }} {{ form_a.as_p }}
+<div>
+    <div class="card " style="margin-left: 20%;margin-right: 20%;">
+        <b>  
+      <div class="card-header text-center">
+            User Registration
+        </div>
+      </b>
+        <div class="card-body">
+            <form method="post" action="{% url 'store:register' %}">
+                {% csrf_token %} {{ form_u.as_p }} {{ form_a.as_p }}
 
-    <button name="submit">Register</button>
-    <input type="hidden" name="next" value="{% url 'store:products' %}" />
-</form>
+                <button class="btn btn-outline-primary" name="submit">Register</button>
+                <input type="hidden" name="next" value="{% url 'store:products' %}" />
+            </form>
+
+        </div>
+    </div>
+</div>
+
 
 {% endblock %}

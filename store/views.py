@@ -8,6 +8,38 @@ from math import ceil
 
 # Create your views here.
 @login_required(login_url='users:login')
+def confirm(request, pro_id, **kw):
+    """Page for confirming the order"""
+    if request.method == 'POST':
+        form = OrderForm()
+        odr = form.save(commit = False)
+        odr.quantity = int(request.POST.get('quantity'))
+        odr.user = request.user
+        product = Product.objects.get(id = pro_id)
+        odr.product = product
+        if(product.rem_quant - odr.quantity>=0):
+            product.rem_quant -= odr.quantity
+            product.save() 
+            odr.save()
+            # Also make an entry of payment
+            return render(request, 'store/redirectpage.html')
+        else:
+            # Redirect to apology
+            context = {'required': odr.quantity,'remaining':product.rem_quant,'productid':pro_id}
+            return render(request, 'store/outofrange.html', context)
+    else:
+        product = Product.objects.get(id = pro_id)
+        quantity = int(request.GET.get('quantity'))
+        if(quantity<=product.rem_quant):
+            amount = quantity * product.unitprice
+            context = {'product':product, 'amount':amount, 'quantity':quantity}
+            return render(request, 'store/confirm.html', context)
+        else:
+            # Redirect to apology
+            context = {'required': quantity,'remaining':product.rem_quant,'productid':pro_id}
+            return render(request, 'store/outofrange.html', context)
+
+@login_required(login_url='users:login')
 def product(request, pro_id):
     """Page for individual product"""
     product = Product.objects.get(id = pro_id)
@@ -18,15 +50,12 @@ def product(request, pro_id):
         form = OrderForm(data = request.POST)
         if form.is_valid():
             odr = form.save(commit = False)
-            odr.user = request.user
-            odr.product = Product.objects.get(id = pro_id)
-            # update product quantites
             product = Product.objects.get(id=pro_id)
             if(product.rem_quant - odr.quantity>=0):
-                product.rem_quant = product.rem_quant - odr.quantity
-                product.save()
-                odr.save()
+                return redirect('store:confirm', pro_id = pro_id)
+            
             else:
+                # Redirect to apology
                 context = {'required': odr.quantity,'remaining':product.rem_quant,'productid':pro_id}
                 return render(request, 'store/outofrange.html', context)
             return redirect('store:products')
@@ -66,7 +95,7 @@ def register(request):
 def searchByProductName(request):
     if request.method == "GET":
         pro_name = request.GET.get('searchquery','')
-        products = Product.objects.filter(name = pro_name)
+        products = Product.objects.filter(name__contains = pro_name)
     return render(request, 'store/search.html',{'products':products,'pro_name':pro_name})
 
 def categorywise(request):
@@ -80,4 +109,7 @@ def categorywise(request):
 
     parameter = {'allProducts':allProduct}
     return render(request,'store/categorywise.html',parameter)
+
+def afterOrderRedirect(request):
+    return render(request,'store/redirectpage.html')
 

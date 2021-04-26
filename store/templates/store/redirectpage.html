@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+<!---->
+{%block body%}
+<!---->
+<div class="text-center">
+    <h3>Thank You For Shoping</h3>
+    <h6>You Will Redirect To Main Page Whithin
+        <span id="counter">5</span> Second </h6>
+</div>
+
+<script>
+    setInterval(function() {
+        var div = document.querySelector("#counter");
+        var count = div.textContent * 1 - 1;
+        div.textContent = count;
+        if (count <= 0) {
+            window.location = '{% url "store:products" %}';
+        }
+    }, 1000);
+</script>
+
+{%endblock%}

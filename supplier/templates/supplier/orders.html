@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+<!---->
+{%block body%}
+<!---->
+<h3> Hey, {{ user.username}} </h3>
+<!---->
+<h5>You Sold Total <b>{{totalProductSold}}</b> Product </h5>
+<p>The Details Are as follow ...</p>
+<table class="table table-hover table-bordered border-primary " style="width: auto;">
+    <thead>
+        <tr>
+            <th scope="row">No.</th>
+            <td>Product Name</td>
+            <td>Quantity</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for o in orders %}
+        <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{o.product__name}}</td>
+            <td>{{o.quantity__sum}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!---->
+{%endblock%}

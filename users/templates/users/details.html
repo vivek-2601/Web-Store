@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+<!---->
+{%block body%}
+<h3> Hey, {{ user.username}}</h3>
+<h5> Your Registered Address : {{address.addr}}</h4>
+    <br>
+
+    <table class="table table-hover table-bordered border-primary ">
+        <thead>
+            <tr>
+                <th scope="row">No.</th>
+                <td>Product Name</td>
+                <td>Quantity</td>
+                <td>UnitPrice</td>
+                <td>Total</td>
+                <td>Date</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for o in orders %}
+            <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{o.product__name}}</td>
+                <td>{{o.quantity }}</td>
+                <td>{{o.product__unitprice}}</td>
+                <td>{% widthratio o.quantity 1 o.product__unitprice %}</td>
+                <td>{{o.date}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {%endblock%}
