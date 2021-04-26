@@ -73,10 +73,9 @@
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'supplier:register' %}">Supplier Registration</a></li>
                     <li class="nav-item"><a class="nav-link active" class="nav-link active" aria-current="page" href="{% url 'users:login' %}">User login</a></li>
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'store:register' %}">User Registration</a></li>
-
                     {% endif %}
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'supplier:products' %}">Sell your products</a></li>
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'store:categorywise' %}">categorywise</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'store:categorywise' %}">Categorywise</a></li>
                 </ul>
                 <form class="d-flex" action="/store/search" method="GET">
                     {% csrf_token %}
