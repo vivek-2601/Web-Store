@@ -60,13 +60,8 @@ def register(request):
             new_user = form_u.save()
             permission = Permission.objects.get(codename='can_sell')
             new_user.user_permissions.add(permission)
-            # Log the new user in and redirect to home page
-            if form_a.is_valid():
-                print("yes")
-                addr = form_a.save(commit=False)
-                addr.user = new_user
-                addr.save()
-            print("no")
+            addr = Address.objects.create(user = new_user, addr = request.POST.get('addr'))
+            addr.save()
             login(request, new_user)
             return redirect('users:redirects')
     # Display a blank or invalid form

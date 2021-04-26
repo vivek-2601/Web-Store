@@ -3,8 +3,9 @@
 {%block body%}
 <p>Supplier registration</p>
 <form method="post" action="{% url 'supplier:register' %}">
-     {{ form_u.as_p }} {{ form_a.as_p }}
-
+    {% csrf_token %} {{ form_u.as_p}} 
+    <label for="id_addr">Address: </label>
+    <input type="textarea" name ="addr" maxlength="500" autocomplete="addr" autofocus required id="id_addr">
     <button name="submit">Register</button>
     <input type="hidden" name="next" value="{% url 'supplier:products' %}" />
 </form>
