@@ -17,20 +17,25 @@ def details(request):
         sortingmethod = request.POST.get('sortingmethod','')
         sortingOrder = request.POST.get('sortingOrder','')
         addr = Address.objects.get(user = request.user)
+        print(sortingmethod)
+        print(sortingOrder)
         if(sortingmethod=='Alphabatical Order Of Product Name'):
             if(sortingOrder=='Ascending'):
                 odrs = Order.objects.filter(user = request.user).values('product__name', 'quantity', 'product__unitprice', 'date').order_by('product__name')      
             else:
+                sortingOrder = "Descending"
                 odrs = Order.objects.filter(user = request.user).values('product__name', 'quantity', 'product__unitprice', 'date').order_by('-product__name')
         elif(sortingmethod=='Order Quantity'):
             if(sortingOrder=='Ascending'):
                 odrs = Order.objects.filter(user = request.user).values('product__name', 'quantity', 'product__unitprice', 'date').order_by('quantity')      
             else:
+                sortingOrder = "Descending"
                 odrs = Order.objects.filter(user = request.user).values('product__name', 'quantity', 'product__unitprice', 'date').order_by('-quantity')
         elif(sortingmethod=='Order Time'):
             if(sortingOrder=='Ascending'):
                 odrs = Order.objects.filter(user = request.user).values('product__name', 'quantity', 'product__unitprice', 'date').order_by('date')      
             else:
+                sortingOrder = "Descending"
                 odrs = Order.objects.filter(user = request.user).values('product__name', 'quantity', 'product__unitprice', 'date').order_by('-date')
         else:
             sortingmethod = "Order Time"
