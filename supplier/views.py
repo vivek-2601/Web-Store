@@ -6,8 +6,8 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.db.models import Count, Sum
 from django.views.decorators.csrf import csrf_exempt
 from store.forms  import AddrForm
-from store.models import Product
-from store.models import Order
+from store.models import *
+
 from .forms import ProductForm
 from django.http import Http404
 
@@ -59,13 +59,9 @@ def register(request):
             new_user = form_u.save()
             permission = Permission.objects.get(codename='can_sell')
             new_user.user_permissions.add(permission)
-            # Log the new user in and redirect to home page
-            if form_a.is_valid():
-                #print("yes")
-                addr = form_a.save(commit=False)
-                addr.user = new_user
-                addr.save()
-            #print("no")
+            new_user.save()
+            addr = Address.objects.create(user = new_user, addr= request.POST.get('addr'))
+            addr.save()
             login(request, new_user)
             return redirect('users:redirects')
     # Display a blank or invalid form
@@ -106,7 +102,7 @@ def edit_pro(request, pro_id):
     return render(request, 'supplier/edit_pro.html', {'form':form, 'product':product})
 
 
-@permission_required('auth_can_sell', login_url='supplier:register')
+@permission_required('auth.can_sell', login_url='supplier:register')
 def orders(request):
     user = request.user
     odrs = Order.objects.filter(product__owner = user).values('product__name').annotate(Sum('quantity'))

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.db.models import F
 from store.models import Product,Address,Order
-
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -12,6 +12,7 @@ def redirects(request):
     else:
         return redirect('store:products')
 
+@login_required(login_url= 'users:login')
 def details(request):
     """Allows user to see his details and order history"""
     if request.method == 'POST':
