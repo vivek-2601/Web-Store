@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.db.models import F
 from store.models import Product,Address,Order
 
 
@@ -17,20 +18,18 @@ def details(request):
         sortingmethod = request.POST.get('sortingmethod','')
         sortingOrder = request.POST.get('sortingOrder','')
         addr = Address.objects.get(user = request.user)
-        print(sortingmethod)
-        print(sortingOrder)
         if(sortingmethod=='Alphabatical Order Of Product Name'):
             if(sortingOrder=='Ascending'):
                 odrs = Order.objects.filter(user = request.user).values('product__name', 'quantity', 'product__unitprice', 'date').order_by('product__name')      
             else:
                 sortingOrder = "Descending"
                 odrs = Order.objects.filter(user = request.user).values('product__name', 'quantity', 'product__unitprice', 'date').order_by('-product__name')
-        elif(sortingmethod=='Order Quantity'):
+        elif(sortingmethod=='Amount Payed'):
             if(sortingOrder=='Ascending'):
-                odrs = Order.objects.filter(user = request.user).values('product__name', 'quantity', 'product__unitprice', 'date').order_by('quantity')      
+                odrs = Order.objects.filter(user = request.user).values('product__name', 'quantity', 'product__unitprice', 'date').order_by(F('product__unitprice')*F('quantity'))      
             else:
                 sortingOrder = "Descending"
-                odrs = Order.objects.filter(user = request.user).values('product__name', 'quantity', 'product__unitprice', 'date').order_by('-quantity')
+                odrs = Order.objects.filter(user = request.user).values('product__name', 'quantity', 'product__unitprice', 'date').order_by(-F('product__unitprice')*F('quantity'))
         elif(sortingmethod=='Order Time'):
             if(sortingOrder=='Ascending'):
                 odrs = Order.objects.filter(user = request.user).values('product__name', 'quantity', 'product__unitprice', 'date').order_by('date')      
@@ -50,4 +49,5 @@ def details(request):
         odrs = Order.objects.filter(user = request.user).values('product__name', 'quantity', 'product__unitprice', 'date').order_by('date')
         context = {'address': addr, 'orders':odrs,'sortingmethod':sortingmethod,'sortingOrder':sortingOrder}
         return render(request, 'users/details.html', context)
+
     
