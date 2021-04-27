@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+<!---->
+{%block body%}
+
+<div>
+    <div class="card " style="margin-left: 20%;margin-right: 20%;">
+        <b>  
+      <div class="card-header text-center">
+        Add a new product
+        </div>
+      </b>
+        <div class="card-body">
+            <form enctype="multipart/form-data" action="{% url 'supplier:new_product' %}" method='post'>
+                {% csrf_token %} {{form.as_p}}
+                <button class="btn btn-primary" name="submit"> Add product</button>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<!---->
+{%endblock%}

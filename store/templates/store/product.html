@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+<!---->
+{%block body%}
+
+
+<div class="container my-4">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="row">
+                {{ product.img_obj}}
+                <img src={{product.image.url}}>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <h2>{{product.name}}</h2>
+            <h5>Seller : {{product.owner}}</h5>
+            <h5>Price : {{product.unitprice}}</h5>
+            <h6>Description : {{product.description}}</h6>
+
+            {% if product.rem_quant %}
+            <h5>Unit Remaining : {{product.rem_quant}}</h5>
+            {% else %}
+            <h5>Out Of Stock</h5>
+            {% endif %}
+
+            <br> {% if product.rem_quant %}
+            <form method=GET action="{% url 'store:confirm' product.id %}">
+                {% csrf_token %}
+                <!---->
+                {{ form.as_p}}
+                <!---->
+                <button class="btn btn-primary" name="placeordersubmit"> Place order</button>
+                <input type='hidden' name='next' value='store:products'>
+                <form>
+                    {%else%}
+                    <h5> Stay Tuned For Next Stok :) </h5>
+                    {%endif%}
+        </div>
+    </div>
+</div>
+
+{%endblock%}

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+<!---->
+{%block body%}
+<h3> Hey, {{ user.username}}</h3>
+<h5> Your Registered Address : {{address.addr}}</h4>
+    <br>
+    <form action="{% url 'users:details' %}" method="POST">
+        {% csrf_token %}
+        <label for="sortingmethod">Choose Sorting Method : </label>
+        <select name="sortingmethod" id="sortingmethod">
+            <option value="Order Time" selected>Order Time</option>
+            <option value="Alphabatical Order Of Product Name">Alphabatical Order Of Product Name</option>
+            <option value="Amount Payed">Amount Payed</option>
+          </select>
+        <br><br>
+
+        <label for="sortingOrder">Choose Sorting Order : </label>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" name="sortingOrder" type="radio" id="Ascending" value="Ascending">
+            <label class="form-check-label" for="Ascending">Ascending</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" name="sortingOrder" type="radio" id="Descending" value="Descending">
+            <label class="form-check-label" for="Descending">Descending</label>
+        </div>
+
+        <button type="submit" name="submit" id="submit" value="submit">Submit</button>
+
+    </form>
+    <br>
+    <h5>
+        Table with {{sortingmethod}} In {{sortingOrder}} Order
+    </h5>
+    <table class=" table table-hover table-bordered border-primary ">
+        <thead>
+            <tr>
+                <th scope="row ">No.</th>
+                <td>Product Name</td>
+                <td>Quantity</td>
+                <td>UnitPrice</td>
+                <td>Total</td>
+                <td>Date</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for o in orders %}
+            <tr>
+                <th scope="row ">{{forloop.counter}}</th>
+                <td>{{o.product__name}}</td>
+                <td>{{o.quantity }}</td>
+                <td>{{o.product__unitprice}}</td>
+                <td>{% widthratio o.quantity 1 o.product__unitprice %}</td>
+                <td>{{o.date}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <script>
+        console.log("AJAY")
+    </script>
+    {%endblock%}

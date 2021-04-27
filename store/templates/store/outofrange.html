@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+<!---->
+{%block body%}
+<div style="align-items: center;">
+    <P>Sorry For Inconvenience </P>
+    <p>We only have left with only {{remaining}} piece and you want {{required}} piece</P>
+    <p>if {{remaining}} piece would be okk then <a href="{% url 'store:product' productid %}">click here</a> or for more product go to home</p>
+</div>
+{%endblock%}

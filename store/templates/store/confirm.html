@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+<!---->
+{%block body%}
+<div>
+    <div class="card text-center">
+        <b>  
+      <div class="card-header">
+            Confirm Your Oder
+        </div>
+      </b>
+        <div class="card-body">
+            <h5 class="card-title">Name : {{product}}</h5>
+            <h5 class="card-title">Quantity : {{quantity}}</h5>
+            <h5 class="card-title">Price : {{product.unitprice}}</h5>
+            <h5 class="card-title">Net Total : {{amount}}</h5>
+
+            <form prefix='confirmation' action='{% url "store:confirm" product.id %}' method='post'>
+                {% csrf_token %}
+                <input type='submit' class="btn btn-success" value='Pay Securly'>
+                <input type='hidden' name='quantity' value={{quantity}}>
+            </form>
+            <form action='{% url "store:products" %}' method='get'>
+                <input type='submit' class="btn btn-danger" value='Cancel'>
+            </form>
+        </div>
+        <div class="card-footer text-muted">
+            Thank You
+        </div>
+    </div>
+</div>
+<!--
+<p> Confirm You Oder </p>
+{{product}} - {{product.unitprice}} Rs.- quantity : {{quantity}} - Pirce you pay: {{amount}} Rs.
+
+<h1></h1>
+<form prefix='confirmation' action='{% url "store:confirm" product.id %}' method='post'>
+    {% csrf_token %}
+    <input type='submit' value='Pay Securly'>
+    <input type='hidden' name='quantity' value={{quantity}}>
+</form>
+<form action='{% url "store:products" %}' method='get'>
+    <input type='submit' value='cancel'>
+</form>
+<h1>{{order.user}}</h1>
+-->
+{%endblock%}

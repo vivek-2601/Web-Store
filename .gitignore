@@ -1,3 +1,9 @@
-.sqlite3
+*.sqlite3
 env/
 __pycache__/
+db.sqlite3
+deleted
+issues
+current_work
+media
+user
