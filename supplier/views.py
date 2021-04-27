@@ -106,7 +106,7 @@ def edit_pro(request, pro_id):
     return render(request, 'supplier/edit_pro.html', {'form':form, 'product':product})
 
 
-@permission_required('auth_can_sell', login_url='supplier:register')
+@permission_required('auth.can_sell', login_url='supplier:register')
 def orders(request):
     user = request.user
     odrs = Order.objects.filter(product__owner = user).values('product__name').annotate(Sum('quantity'))

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
+from django.db.models import F
 from store.models import Product,Address,Order
-
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -11,6 +12,7 @@ def redirects(request):
     else:
         return redirect('store:products')
 
+@login_required(login_url= 'users:login')
 def details(request):
     """Allows user to see his details and order history"""
     if request.method == 'POST':
@@ -22,11 +24,11 @@ def details(request):
                 odrs = Order.objects.filter(user = request.user).values('product__name', 'quantity', 'product__unitprice', 'date').order_by('product__name')      
             else:
                 odrs = Order.objects.filter(user = request.user).values('product__name', 'quantity', 'product__unitprice', 'date').order_by('-product__name')
-        elif(sortingmethod=='Order Quantity'):
+        elif(sortingmethod=='Amount Payed'):
             if(sortingOrder=='Ascending'):
-                odrs = Order.objects.filter(user = request.user).values('product__name', 'quantity', 'product__unitprice', 'date').order_by('quantity')      
+                odrs = Order.objects.filter(user = request.user).values('product__name', 'quantity', 'product__unitprice', 'date').order_by(F('product__unitprice')*F('quantity'))      
             else:
-                odrs = Order.objects.filter(user = request.user).values('product__name', 'quantity', 'product__unitprice', 'date').order_by('-quantity')
+                odrs = Order.objects.filter(user = request.user).values('product__name', 'quantity', 'product__unitprice', 'date').order_by(-F('product__unitprice')*F('quantity'))
         elif(sortingmethod=='Order Time'):
             if(sortingOrder=='Ascending'):
                 odrs = Order.objects.filter(user = request.user).values('product__name', 'quantity', 'product__unitprice', 'date').order_by('date')      
