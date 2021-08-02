@@ -8,14 +8,21 @@ class Address(models.Model):
     """Address of a user"""
     # This can be changed from OnetoOne to ForignKey if we 
     # want our users to have multiple addresses.
-    
+    class Meta:
+        verbose_name_plural = "Addresses"
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     addr = models.CharField(verbose_name="address", max_length=150)
+    def __str__(self):
+        return f"{self.addr[:50]}..."
 
 
 class Category(models.Model):
     """Category of a product."""
     name = models.CharField(max_length=100, unique=True)
+    class Meta:
+        verbose_name_plural = "Categories"
+
     def __str__(self):
         return self.name
 
@@ -45,10 +52,7 @@ class Order(models.Model):
 
     def __str__(self):
         return self.product.name + '_' + str(self.quantity)
-        
-class Supplier(models.Model):
-    """Suplier supplies product."""
-    # set id later on
+ 
 
 class Payment(models.Model):
     """Stores information about payment"""

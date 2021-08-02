@@ -64,12 +64,11 @@ def register(request):
                 #print("yes")
                 addr = form_a.save(commit=False)
                 addr.user = new_user
-                addr.save()
-            #print("no")
+                addr.save()                
             login(request, new_user)
             return redirect('users:redirects')
     # Display a blank or invalid form
-    context = {'form_u': form_u, 'from_a':form_a}
+    context = {'form_u': form_u, 'form_a':form_a}
     return render(request, 'registration/supplier_register.html', context)
 
 @permission_required('auth.can_sell', login_url='supplier:register')
