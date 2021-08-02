@@ -59,13 +59,18 @@ def register(request):
             new_user = form_u.save()
             permission = Permission.objects.get(codename='can_sell')
             new_user.user_permissions.add(permission)
-            new_user.save()
-            addr = Address.objects.create(user = new_user, addr= request.POST.get('addr'))
-            addr.save()
+
+            # Log the new user in and redirect to home page
+            if form_a.is_valid():
+                #print("yes")
+                addr = form_a.save(commit=False)
+                addr.user = new_user
+                addr.save()                
+
             login(request, new_user)
             return redirect('users:redirects')
     # Display a blank or invalid form
-    context = {'form_u': form_u, 'from_a':form_a}
+    context = {'form_u': form_u, 'form_a':form_a}
     return render(request, 'registration/supplier_register.html', context)
 
 @permission_required('auth.can_sell', login_url='supplier:register')
