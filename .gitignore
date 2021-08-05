@@ -1,12 +1,6 @@
 *.sqlite3
-env/
 __pycache__/
 db.sqlite3
-deleted
-issues
-current_work
 media
-user
-front
-back
-database
+readme.md
+
